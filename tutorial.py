@@ -152,19 +152,3 @@ P.a = 5
 print M.a
 
 
-# Fetch data from an API
-import requests
-
-s = requests.Session()
-try:
-	resp = s.get("https://apiqamaster.blueliv.net/v1/malware/{malware_id}".format(malware_id=""), timeout=30, auth=("developer", "repoleved"))
-	resp.raise_for_status()
-except Exception as e:
-	print("Error ",e)
-else:
-	data = resp.json()
-	print(data)
-finally:
-	print("I am in finally")
-
-print(data["sha1"])
