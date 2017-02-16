@@ -21,18 +21,72 @@ squares = [x**2 for x in range(10)]
 
 a = map(lambda x: x*x*x, range(10))
 print(a)
+# with list comprehension
+a = [x*x*x for x in range(10)]
+print(a)
 
-zip_list = zip(list_ex, [0,1,2])
-
+zip_list = zip(list_ex, range(3))
 print(zip_list)
 
 filtered_list = filter(lambda x: "n" in x, list_ex)
-
+print(filtered_list)
+#with list comprehension
+filtered_list = [x for x in list_ex if "n" in x]
 print(filtered_list)
 
 reduced = reduce(lambda x,y: x+y, [1,2,3,4,5])
-
 print(reduced)
+
+print("Is there any pen in list: " + str(any([x for x in list_ex if "pen" == x])))
+print("All elements are pen: " + str(all(["pen" == x for x in list_ex])))
+
+# args and kwargs
+
+def test(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+
+test("I am an arg", keyword="I am a kwarg")
+
+params = ("I am an arg", )
+
+kparams = {
+    "keyword" : "I am a kwarg"
+}
+
+test(*params, **kparams)
+
+#Default params
+
+def test2(num, mem=[]):
+    [mem.append(x) for x in range(num)]
+    print mem
+
+test2(3)
+test2(3, [])
+test2(3)
+
+def test3(num, mem=None):
+    if not mem:
+        mem = []
+    [mem.append(x) for x in range(num)]
+    print mem
+
+test3(3)
+test3(3, [])
+test3(3)
+
+
+def fib(n, mem={}):
+    if n <= 2:
+        return 1
+    else:
+        val = mem.get(str(n-1), fib(n-1)) + mem.get(str(n-2), fib(n-2))
+        mem[str(n)] = val
+        return val
+
+print(fib(20))
 
 # Classes
 
@@ -127,11 +181,11 @@ c.stop()
 d.stop()
 e.stop()
 
-# a.pause()
-# b.pause()
-# c.pause()
+a.pause()
+b.pause()
+c.pause()
 d.pause()
-#e.pause()
+e.pause()
 
 
 ###############
